@@ -16,7 +16,7 @@ module.exports = app => {
 
     * single(id){
       var res = '';
-      res = yield app.mysql.get('user',{'userCode': id});
+      res = yield app.mysql.get('users',{'id': id});
       return res;
     }
 
