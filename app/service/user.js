@@ -16,7 +16,7 @@ module.exports = app => {
 
     * single(id){
       var res = '';
-      res = yield app.mysql.get('users',{'id': id});
+      res = yield app.mysql.get('USER_INFO',{'user_code': id});
       return res;
     }
 
@@ -24,13 +24,13 @@ module.exports = app => {
       var res = '';
       // 更新内容
       const row = {
-        'userName': 'bcde'
+        'user_name': 'bcde'
       };
       // WHERE 条件
       const options = {
-        'where': {'userCode':id}
+        'where': {'user_code':id}
       };
-      const result = yield this.app.mysql.update('user', row, options);
+      const result = yield this.app.mysql.update('USER_INFO', row, options);
       if (result.affectedRows == 1){
         res = {'msg':'success'};
       } else {
@@ -43,7 +43,7 @@ module.exports = app => {
       var res = '';
       const conn = yield app.mysql.beginTransaction();
       const result = yield app.mysql.beginTransactionScope(function* (conn){
-        res = yield app.mysql.get('user',{'userCode':id});
+        res = yield app.mysql.get('USER_INFO',{'user_code':id});
         if(res.state != '1'){
           // 更新内容
           const row = {
